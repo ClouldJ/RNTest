@@ -1,30 +1,28 @@
-import { observable } from 'mobx'
-import { observer, inject } from 'mobx-react'
-import * as React from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View, NativeModules } from 'react-native'
-import { createStaticNavigation, useNavigation } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Class from './Class'
-import { FunctionPage } from './FunctionPage'
+import * as React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { createStaticNavigation, useNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Class from "./Class";
+import { FunctionPage } from "./FunctionPage";
 
 const CustomButton = (props) => {
   const {
     style,
-    title = 'function',
-    onPress
-  } = props
+    title = "function",
+    onPress,
+  } = props;
 
   return (
     <TouchableOpacity style={[style, styles.center]} onPress={onPress}>
       <Text style={styles.buttonTitle}>{title}</Text>
     </TouchableOpacity>
-  )
+  );
 
-}
+};
 
 const Home = (props) => {
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -33,73 +31,71 @@ const Home = (props) => {
         <>
           <CustomButton
             style={styles.buttonStyle}
-            title={'class'}
+            title={"class"}
             onPress={() => {
-              navigation.navigate('Class')
+              navigation.navigate("Class");
             }}
           />
           <CustomButton
             style={styles.buttonStyle}
             onPress={() => {
-              navigation.navigate('function')
+              navigation.navigate("function");
             }}
           />
         </>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const MainStack = createNativeStackNavigator({
   screens: {
     Home: Home,
     Class: {
-      screen: Class
+      screen: Class,
       // options: { headerShown: false }
     },
     function: {
-      screen: FunctionPage
+      screen: FunctionPage,
       // options: { headerShown: false }
-    }
-  }
-})
+    },
+  },
+});
 
-const Navigation = createStaticNavigation(MainStack)
+const Navigation = createStaticNavigation(MainStack);
 
 export default class App extends React.Component {
-
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
-    return <Navigation />
+    return <Navigation />;
   }
-
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    flex: 1
+    backgroundColor: "white",
+    flex: 1,
   },
   center: {
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonStyle: {
-    width: '50%',
-    height: '10%',
+    width: "50%",
+    height: "10%",
     marginTop: 100,
-    backgroundColor: 'red'
+    backgroundColor: "red",
   },
   buttonTitle: {
     fontSize: 20,
-    color: 'white'
+    color: "white",
   },
   originImage: {
     width: 240,
     height: 192,
-    marginTop: 50
-  }
-})
+    marginTop: 50,
+  },
+});
